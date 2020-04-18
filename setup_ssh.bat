@@ -9,8 +9,11 @@ set uname=cs30sp20%uname%
 :: Verify that user inputted the correct credentials
 :: -------------------------------------------------
 echo: 
-echo Please verify the credentials listed (control-C to exit, then restart) & echo Email: %email% & echo Uname: %uname%
+echo Please verify the credentials listed (to make corrections, press control-C to exit, then restart) & echo Email: %email% & echo Uname: %uname%
 set /P resp=""
+
+:: Make .ssh if it does not exist, ignore error message if it already exists
+@mkdir %userprofile%\.ssh
 
 :: Set path to .ssh directory for commands to follow
 set sshdir=%userprofile%\.ssh
