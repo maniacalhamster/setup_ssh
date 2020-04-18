@@ -1,5 +1,7 @@
 Heyya, this is just a small batch file that will automate the process of setting up easy ssh connections to your cs30sp20 account on the ieng6 server.
 
+Just git copy (or just download as a zip and extract) the batch file and call it in command line to run (in the directory it's located in: setup_ssh).
+
 The motivation behind making this small batch file was to help others (using windows) set up a secure and easy way to log into their cs30sp20 account for doing
 PAs through the built in openSSH client that Windows supports and using SSH keys (rather than entering the whole username@server and password each time)!
 
