@@ -13,10 +13,10 @@ echo Please verify the credentials listed (to make corrections, press control-C 
 set /P resp=""
 
 :: Make .ssh if it does not exist, ignore error message if it already exists
-@mkdir %userprofile%\.ssh
+@mkdir "%userprofile%\.ssh"
 
 :: Set path to .ssh directory for commands to follow
-set sshdir=%userprofile%\.ssh
+set sshdir="%userprofile%\.ssh"
 
 :: Generate a new ssh pub/priv key pair to use for cs30
 echo %sshdir%\cs30_id_rsa| ssh-keygen -t rsa -b 4096 -C aks002@ucsd.edu -P ""
