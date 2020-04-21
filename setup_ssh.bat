@@ -19,7 +19,7 @@ set /P resp=""
 set sshdir="%userprofile%\.ssh
 
 :: Generate a new ssh pub/priv key pair to use for cs30
-echo %sshdir%\cs30_id_rsa"| ssh-keygen -t rsa -b 4096 -C aks002@ucsd.edu -P ""
+echo %sshdir%\cs30_id_rsa"| ssh-keygen -t rsa -b 4096 -C %email% -P ""
 
 :: SSH connect using inputted user credentials once to append public key to authorized keys in ieng6
 echo Connecting to ieng6 server to append public key to authorized_keys under %uname%...
