@@ -13,7 +13,7 @@ echo Please verify the credentials listed (to make corrections, press control-C 
 set /P resp=""
 
 :: Make .ssh if it does not exist, ignore error message if it already exists
-@mkdir "%userprofile%\.ssh"
+mkdir "%userprofile%\.ssh" 2>NUL
 
 :: Set path to .ssh directory for commands to follow
 set sshdir=%userprofile%\.ssh
