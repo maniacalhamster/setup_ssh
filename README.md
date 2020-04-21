@@ -15,7 +15,7 @@ After that, the contents of the public key are appended to the authorized_keys f
 Note: if this is the first time the user is ssh-ing into the ieng6 server, they will be asked whether they trust the source, just enter "yes" (or "y", idk)
 Also: the user will be asked to enter their password to log into their cs30sp20 account (make sure you changed the old password through ETS first!)
 
-Finally, the user will be prompted for the shortcut name they want to use to log in (just type out 'ssh <nickname>' to log in after this!)
+Finally, the user will be prompted for the shortcut name they want to use to log in (just type out 'ssh [nickname]' to log in after this!)
 Using the input username, shortcut name, generated ssh key, and the known hostname (ieng6.ucsd.edu), an entry is generated in the ssh config file.
 
 The user is notified when the batch file is over and told how to utilize all these to log easily.
