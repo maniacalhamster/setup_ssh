@@ -23,7 +23,7 @@ echo %sshdir%\cs30_id_rsa| ssh-keygen -t rsa -b 4096 -C %email% -P ""
 
 :: SSH connect using inputted user credentials once to append public key to authorized keys in ieng6
 echo Connecting to ieng6 server to append public key to authorized_keys under %uname%...
-type "%sshdir%\cs30_id_rsa.pub"| ssh %uname%@ieng6.ucsd.edu "cat >> ~/.ssh/authorized_keys"
+type "%sshdir%\cs30_id_rsa.pub"| ssh %uname%@ieng6.ucsd.edu "cat>a.temp && mkdir -p .ssh && cat a.temp>>.ssh/authorized_keys && rm a.temp"
 
 :: Ask for shortcut name for logging into ieng6
 set /P short="Now choose a nickname for logging into your cse30 account (you'll use this to connect to your cs30sp20 account): "
