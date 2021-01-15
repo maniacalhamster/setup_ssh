@@ -34,7 +34,7 @@ foreach($pubkey in (ls $path\*.pub).Name){
         Write-Host " was found";}
 }
 if (!($key)){
-    write-host -ForegroundColor Yellow "`no No Key pairs found!!";
+    write-host -ForegroundColor Yellow "`to No Key pairs found!!";
 }
 
 $key=read-host("`nSelect Key Pair`t");
