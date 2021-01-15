@@ -1,3 +1,19 @@
+# SSH Key and config setup powershell script
+============================================  
+Originally made in early 2020 to set up ssh key and config files for logging 
+into the ieng6 servers for cse30, which was generally not very well tested.
+
+Updated with a new powershell script that sets up ssh keys and configs for a 
+more general case and has had significantly more testing as well as an improved 
+flow.
+
+* Reads curent process to user and gives clearer instructions for less confusion
+* Tests user data and terminates script if error detected
+* Searches through pre-existing keys and offers the ability to use them
+* Colors added to better emphasize certain texts
+
+=== Old readme follows below ===============
+
 SSH key and config setup batch for Windows
 ============================================
 Heyya, this is just a small batch file that will automate the process of setting up easy ssh connections to your cs30sp20 account on the ieng6 server.
