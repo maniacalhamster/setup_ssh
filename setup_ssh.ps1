@@ -20,7 +20,7 @@ $path="$env:userprofile\.ssh";
 
 # Create .ssh folder if not exist
 if (!(Test-Path "$path")){ 
-	New-Item $path;
+	New-Item $path -ItemType "directory";
 }
 
 # Look through ~/.ssh for existing key/key.pub pairs and list them to user
@@ -68,7 +68,7 @@ else {
 # appropriate arguments based on whether comment was given or not
     $comment=Read-Host("`nComment to append to new key `n [Usually name of
             device you're connecting with or user email]`nComment`t");
-    Write-Host();
+    Write-Host("");
 
     if ($comment){
         ssh-keygen -b 4096 -t rsa -C $comment -N '""' -f "$path\$key";
