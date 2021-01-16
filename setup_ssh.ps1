@@ -37,8 +37,8 @@ foreach($pubkey in (ls $path\*.pub).Name){
 # List all existing keys and prompt user to input they key pair they wish to use
 # Else, if no matches, prompt user for new key pair name
 if (!($key)){
-    Write-Host -ForegroundColor Yellow "`no No Key pairs found!!";
-    $key=Read-Host("`nName for new Key Pair`t");
+    Write-Host -ForegroundColor Yellow "`to No Key pairs found!!";
+    $key=Read-Host("`nNew Key Pair Name`t");
 }
 else{
     $key=Read-Host("`nSelect Key Pair`t");
