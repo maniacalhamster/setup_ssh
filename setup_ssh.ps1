@@ -50,7 +50,7 @@ if (!($key)){
 	$key="id_rsa";
 }
 
-# Notify user of whether new key will be generated (user input nonexisting) 
+# Notify user of whether new key will be generated (user input non-existing) 
 # or selected key will be used (use input existing)
 if ((Test-Path $path\$key) -And (Test-Path "$path\$key.pub")){
     Write-Host -NoNewline "`nUsing existing key pair ";
@@ -66,8 +66,8 @@ else {
 # Key created using rsa algorithm with 4096 Bytes and no passphrase
 # Prompt user for addition comment info to generate new key with and use 
 # appropriate arguments based on whether comment was given or not
-    $comment=Read-Host("`nComment to append to new key `n [Usually name of
-            device you're connecting with or user email]`nComment`t");
+    Write-Host("`n[Comments are usually the name of device you're connecting with or user email]");
+    $comment=Read-Host("Comment to append to new key");
     Write-Host("");
 
     if ($comment){
@@ -78,7 +78,7 @@ else {
     }
 
 # Notify upon successful key creation
-    Write-Host -NoNewline "`nSucessfully created key pair ";
+    Write-Host -NoNewline "`nSuccessfully created key pair ";
     Write-Host -ForegroundColor Yellow $key;
 }
 
@@ -97,13 +97,13 @@ if($LASTEXITCODE){
     return;
 }
 
-# Ask for shortcut name for logging into host if key succesfully appended
+# Ask for shortcut name for logging into host if key successfully appended
 Write-Host "`nPick a nickname for $hostname you'd prefer to use"
 Write-Host "[Generally a short name, run like this --> ssh <nickname>]";
 $nickname=Read-Host("Nickname`t")
 
 # Add configurations for host onto user's ssh config file
-# Specify ASCII encoding for Powershell V5.1 (defaults to utf8)
+# Specify ASCII encoding for Powershell V 5.1 (defaults to utf-8)
 Write-Output "Host $nickname`n`tHostname $hostname`n`tUser $username`n`tIdentityFile `"$path\$key`"" |
 Out-File -Append -Encoding ASCII "$path\config"
 
