@@ -66,9 +66,9 @@ else {
 # Key created using rsa algorithm with 4096 Bytes and no passphrase
 # Prompt user for addition comment info to generate new key with and use 
 # appropriate arguments based on whether comment was given or not
-    Write-Host("`n[Comments are usually the name of device you're connecting with or user email]");
+    Write-Host "`n[Comments are usually the name of device you're connecting with or user email]";
     $comment=Read-Host("Comment to append to new key");
-    Write-Host("");
+    Write-Host;
 
     if ($comment){
         ssh-keygen -b 4096 -t rsa -C $comment -N '""' -f "$path\$key";
