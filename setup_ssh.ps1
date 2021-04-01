@@ -4,14 +4,29 @@ Write-Host "
 Enter some info first
 ------------------------------------------";
 $hostname=Read-host("Hostname (IP)`t");
+$testNetwork = Start-Job {Test-NetConnection -ComputerName $using:hostname -Port 22};
 $username=Read-Host("Username`t");
 
 # Test the given host for a network connection, notifying user and terminating
-# script if failed to connect to host
-if (!(Test-Connection $hostname -Count 1 -Quiet)) {
-    Write-Host -NoNewline "`n!Hostname ";
-    Write-Host -NoNewline -ForegroundColor Yellow "$hostname";
-    Write-Host " was unreachable - terminating script...";
+# script if failed to connect to host (specifically check port 22)
+Write-Host -NoNewLine "Checking if ";
+Write-Host -NoNewline -ForegroundColor Yellow "$hostname";
+Write-Host -NoNewline " is reachable";
+
+while($testNetwork.State -eq "Running"){
+    Write-Host -NoNewline "...";
+    Start-Sleep -Seconds 1.5;
+}
+
+Write-Host "`n"
+$testResults = Receive-Job $testNetwork;
+
+if ($testResults.TcpTestSucceeded){
+    Write-Host "Hostname is valid!";
+    Remove-Job $testNetwork;
+}
+else {
+    Write-Host "`nHostname was unreachable - terminating script...";
     return;
 }
 
