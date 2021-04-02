@@ -97,13 +97,31 @@ else {
     Write-Host -ForegroundColor Yellow $key;
 }
 
+# Before copying the key into the host, figure out what commands can be run by
+# asking the user to select whether the host is Windows or Linux
+Write-Host "Before copying over the public key, pick the host's OS (default Linux):";
+Write-Host -NoNewline "`to ";
+Write-Host -ForegroundColor Yellow "Linux";
+Write-Host "`to Windows";
+$host_os = Read-Host("`nSelect host's OS");
+
 # Announce the need to enter a password and the reason (appending public key)
 Write-Host "`nNow SSHing into $username@$hostname to add public key to list of authorized keys";
 Write-Host "This should be the last time you'll have to manually enter a password!`n";
 
+# Process for copying pubkey over is similar for Windows and Linux w/ diff commands
+# - store piped input (pubkey) temporarily
+# - create .ssh directory if not exist
+# - append the temporarily stored pubkey contents into authorized_keys file
+$cmd_commands  = "(mkdir .ssh 2>nul & set /p pubkey= & call echo %pubkey% >> .ssh\authorized_keys)";
+$bash_commands = "cat>temp && mkdir -p ~/.ssh && cat temp>>~/.ssh/authorized_keys && rm temp";
+
 # SSH into host to add user public key to 'authorized_keys' in host
-Get-Content "$path\$key.pub" | 
-ssh $username@$hostname "cat>temp && mkdir -p ~/.ssh && cat temp>>~/.ssh/authorized_keys && rm temp";
+if($host_os = "Windows") {
+    Get-Content "$path\$key.pub" | ssh $username@$hostname "$cmd_commands";
+} else {
+    Get-Content "$path\$key.pub" | ssh $username@$hostname "$bash_commands";
+}
 
 # If ssh connection failed (wrong password or non-response), notify user of
 # detected failure and exit script
@@ -119,7 +137,10 @@ $nickname=Read-Host("Nickname`t")
 
 # Add configurations for host onto user's ssh config file
 # Specify ASCII encoding for Powershell V 5.1 (defaults to utf-8)
-Write-Output "Host $nickname`n`tHostname $hostname`n`tUser $username`n`tIdentityFile `"$path\$key`"" |
+if ($host_os = "Windows"){
+    $win_options = "`n`tRequestTTY force`n`tRemoteCommand powershell";
+}
+Write-Output "Host $nickname`n`tHostname $hostname`n`tUser $username`n`tIdentityFile `"$path\$key`"$win_options" |
 Out-File -Append -Encoding ASCII "$path\config"
 
 # Notify user of script completion and how to use the new shortcut
