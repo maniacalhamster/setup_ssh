@@ -117,7 +117,7 @@ $cmd_commands  = "(mkdir .ssh 2>nul & set /p pubkey= & call echo %pubkey% >> .ss
 $bash_commands = "cat>temp && mkdir -p ~/.ssh && cat temp>>~/.ssh/authorized_keys && rm temp";
 
 # SSH into host to add user public key to 'authorized_keys' in host
-if($host_os = "Windows") {
+if($host_os -eq "Windows") {
     Get-Content "$path\$key.pub" | ssh $username@$hostname "$cmd_commands";
 } else {
     Get-Content "$path\$key.pub" | ssh $username@$hostname "$bash_commands";
@@ -137,7 +137,7 @@ $nickname=Read-Host("Nickname`t")
 
 # Add configurations for host onto user's ssh config file
 # Specify ASCII encoding for Powershell V 5.1 (defaults to utf-8)
-if ($host_os = "Windows"){
+if ($host_os -eq "Windows"){
     $win_options = "`n`tRequestTTY force`n`tRemoteCommand powershell";
 }
 Write-Output "Host $nickname`n`tHostname $hostname`n`tUser $username`n`tIdentityFile `"$path\$key`"$win_options" |
