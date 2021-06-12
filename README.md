@@ -23,13 +23,13 @@ The motivation behind making this small batch file was to help others (using win
 The built in openSSH client supported by Windows supports is used along with SSH keys (rather than entering the whole username@server and password each time)!
 
 ## Using it
-Just git clone from your windows command prompt or download as a zip and extract
+1. Just `git clone https://github.com/maniacalhamster/setup_ssh` in powershell/command prompt (or download as a zip and extract if that's easier)
 
-Once copied over, just cd into the directory it was saved to and run the batch file:
+2. Once copied over, just `cd` into the directory it was saved to and run the batch file:
 
-In command prompt >setup_ssh.bat
+3. In powershell/command prompt > `setup_ssh.bat`
 
-Follow the instructions of the batch and just call 'ssh [name]' afterwards to log-in/ 
+4. Follow the instructions of the batch and just call `ssh [name]` afterwards to log-in 
 
 ## How it works
 The batch file itself is commented and echo statements on what's happening are printed out each step of the way but the flow of what's happening is as follows:
