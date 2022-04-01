@@ -100,13 +100,13 @@ else {
     Write-Host -ForegroundColor Yellow $key;
 }
 
-# Before copying the key into the host, figure out what commands can be run by
+# Before copying the key into the server, figure out what commands can be run by
 # asking the user to select whether the host is Windows or Linux
-Write-Host "Before copying over the public key, pick the host's OS (default Linux):";
+Write-Host "Before copying over the public key, pick the server's OS (default Linux):";
 Write-Host -NoNewline "`to ";
 Write-Host -ForegroundColor Yellow "Linux";
 Write-Host "`to Windows";
-$host_os = Read-Host("`nSelect host's OS");
+$host_os = Read-Host("`nSelect server's OS");
 
 # Announce the need to enter a password and the reason (appending public key)
 Write-Host "`nNow SSHing into $username@$hostname to add public key to list of authorized keys";
