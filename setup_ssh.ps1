@@ -13,6 +13,9 @@ Write-Host -NoNewLine "Checking if ";
 Write-Host -NoNewline -ForegroundColor Yellow "$hostname";
 Write-Host -NoNewline " is reachable";
 
+$temporary = $ProgressPreference
+$ProgressPreference = "Silently Continue"
+
 while($testNetwork.State -eq "Running"){
     Write-Host -NoNewline "...";
     Start-Sleep -Seconds 1.5;
@@ -132,7 +135,7 @@ if($LASTEXITCODE){
 
 # Ask for shortcut name for logging into host if key successfully appended
 Write-Host "`nPick a nickname for $hostname you'd prefer to use"
-Write-Host "[Generally a short name, run like this --> ssh <nickname>]";
+Write-Host "[Generally a short name, so you can connect like this: ssh <nickname>]";
 $nickname=Read-Host("Nickname`t")
 
 # Add configurations for host onto user's ssh config file
@@ -146,3 +149,5 @@ Out-File -Append -Encoding ASCII "$path\config"
 # Notify user of script completion and how to use the new shortcut
 Write-Host -NoNewline "Setup complete, you can log into $hostname as $username by just calling ";
 Write-Host -NoNewline -ForegroundColor Yellow "ssh $nickname"; Write-Host " now";
+
+$ProgressPreference = $temporary
